@@ -1,4 +1,4 @@
-﻿namespace RBush;
+namespace RBush;
 
 /// <summary>
 /// Exposes an <see cref="Envelope"/> that describes the
@@ -9,5 +9,5 @@ public interface ISpatialData
 	/// <summary>
 	/// The bounding box of the current object.
 	/// </summary>
-	ref readonly Envelope Envelope { get; }
+	Envelope Envelope { get; }
 }

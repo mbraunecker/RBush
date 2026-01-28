@@ -8,8 +8,6 @@ public partial class RBush<T>
 	/// </summary>
 	public class Node : ISpatialData
 	{
-		private Envelope _envelope;
-
 		internal Node(List<ISpatialData> items, int height)
 		{
 			Height = height;
@@ -20,7 +18,7 @@ public partial class RBush<T>
 		internal void Add(ISpatialData node)
 		{
 			Items.Add(node);
-			_envelope = Envelope.Extend(node.Envelope);
+			Envelope = Envelope.Extend(node.Envelope);
 		}
 
 		internal void Remove(ISpatialData node)
@@ -37,7 +35,7 @@ public partial class RBush<T>
 
 		internal void ResetEnvelope()
 		{
-			_envelope = GetEnclosingEnvelope(Items);
+			Envelope = GetEnclosingEnvelope(Items);
 		}
 
 		internal readonly List<ISpatialData> Items;
@@ -64,6 +62,6 @@ public partial class RBush<T>
 		/// Gets the bounding box of all of the descendents of the 
 		/// current <see cref="Node"/>.
 		/// </summary>
-		public ref readonly Envelope Envelope => ref _envelope;
+		public Envelope Envelope { get; private set; }
 	}
 }

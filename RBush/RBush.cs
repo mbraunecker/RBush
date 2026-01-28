@@ -25,7 +25,7 @@ public partial class RBush<T> : ISpatialDatabase<T>, ISpatialIndex<T> where T : 
 	/// <summary>
 	/// The bounding box of all elements currently in the data structure.
 	/// </summary>
-	public ref readonly Envelope Envelope => ref Root.Envelope;
+	public Envelope Envelope { get; private set; }
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="RBush{T}"/> that is

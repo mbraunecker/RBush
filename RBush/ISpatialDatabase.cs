@@ -24,8 +24,8 @@ public interface ISpatialDatabase<T> : ISpatialIndex<T>
 	/// <returns><see langword="bool" /> indicating whether the item was removed.</returns>
 	bool Delete(T item);
 
-   /// <summary>
-   /// Removes an object from the <see cref="ISpatialDatabase{T}"/> using a specified
+	/// <summary>
+	/// Removes an object from the <see cref="ISpatialDatabase{T}"/> using a specified
 	/// search envelope for tree traversal instead of the item's current envelope.
 	/// Use when the item's <see cref="ISpatialData.Envelope"/> has changed since insertion.
 	/// </summary>

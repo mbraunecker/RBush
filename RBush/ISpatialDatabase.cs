@@ -1,4 +1,4 @@
-﻿namespace RBush;
+namespace RBush;
 
 /// <summary>
 /// Provides the base interface for the abstraction for
@@ -23,6 +23,16 @@ public interface ISpatialDatabase<T> : ISpatialIndex<T>
 	/// </param>
 	/// <returns><see langword="bool" /> indicating whether the item was removed.</returns>
 	bool Delete(T item);
+
+   /// <summary>
+   /// Removes an object from the <see cref="ISpatialDatabase{T}"/> using a specified
+	/// search envelope for tree traversal instead of the item's current envelope.
+	/// Use when the item's <see cref="ISpatialData.Envelope"/> has changed since insertion.
+	/// </summary>
+	/// <param name="item">The object to be removed.</param>
+	/// <param name="searchEnvelope">The envelope the item had when it was inserted.</param>
+	/// <returns><see langword="bool" /> indicating whether the item was removed.</returns>
+	bool Delete(T item, in Envelope searchEnvelope);
 
 	/// <summary>
 	/// Removes all elements from the <see cref="ISpatialDatabase{T}"/>.

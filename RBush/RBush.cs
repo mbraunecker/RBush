@@ -181,6 +181,17 @@ public partial class RBush<T> : ISpatialDatabase<T>, ISpatialIndex<T> where T : 
 	public bool Delete(T item) =>
 		DoDelete(Root, item);
 
+	/// <summary>
+	/// Removes an object from the <see cref="RBush{T}"/> using a specified search envelope
+	/// for tree traversal. Use when the item's <see cref="ISpatialData.Envelope"/> has changed
+	/// since it was inserted (e.g. after an in-place resize).
+	/// </summary>
+	/// <param name="item">The object to be removed.</param>
+	/// <param name="searchEnvelope">The envelope the item had when it was inserted.</param>
+	/// <returns><see langword="bool" /> indicating whether the item was deleted.</returns>
+	public bool Delete(T item, in Envelope searchEnvelope) =>
+		DoDelete(Root, item, searchEnvelope);
+
 	private bool DoDelete(Node node, T item)
 	{
 		if (!node.Envelope.Contains(item.Envelope))
@@ -195,13 +206,40 @@ public partial class RBush<T> : ISpatialDatabase<T>, ISpatialIndex<T> where T : 
 			Count -= cnt;
 			node.ResetEnvelope();
 			return true;
-
 		}
 
 		var flag = false;
 		foreach (var n in node.Items)
 		{
 			flag |= DoDelete((Node)n, item);
+		}
+
+		if (flag)
+			node.ResetEnvelope();
+
+		return flag;
+	}
+
+	private bool DoDelete(Node node, T item, in Envelope searchEnvelope)
+	{
+		if (!node.Envelope.Contains(searchEnvelope))
+			return false;
+
+		if (node.IsLeaf)
+		{
+			var cnt = node.Items.RemoveAll(i => _comparer.Equals((T)i, item));
+			if (cnt == 0)
+				return false;
+
+			Count -= cnt;
+			node.ResetEnvelope();
+			return true;
+		}
+
+		var flag = false;
+		foreach (var n in node.Items)
+		{
+			flag |= DoDelete((Node)n, item, searchEnvelope);
 		}
 
 		if (flag)

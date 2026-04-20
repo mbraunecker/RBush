@@ -42,6 +42,21 @@
 	<MinVerAutoIncrement>minor</MinVerAutoIncrement>
 	<MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
 	<MinVerTagPrefix>v</MinVerTagPrefix>
+	<AssemblyVersion>1.0.1.9606</AssemblyVersion>
+	<FileVersion>1.0.1.9606</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net47|AnyCPU'">
+    <ShouldCreateLogs>True</ShouldCreateLogs>
+    <AdvancedSettingsExpanded>False</AdvancedSettingsExpanded>
+    <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
+    <AssemblyVersionSettings>IncrementOnDemand.IncrementOnDemandWithResetOnIncrease.Increment.DeltaDayStamp</AssemblyVersionSettings>
+    <UpdatePackageVersion>False</UpdatePackageVersion>
+    <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
+    <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
+    <AssemblyFileVersionSettings>IncrementOnDemand.IncrementOnDemandWithResetOnIncrease.Increment.DeltaDayStamp</AssemblyFileVersionSettings>
   </PropertyGroup>
 
 </Project>
